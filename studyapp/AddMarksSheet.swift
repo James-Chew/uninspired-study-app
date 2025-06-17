@@ -13,34 +13,54 @@ struct AddMarksSheetView: View {
     @State private var marks = ""
     @State private var weightage = ""
     @State private var subject = ""
+    
     let exams = ["Math", "Science", "History", "English", "Literature", "Chinese", "Geography"]
     
     var body: some View {
-        VStack{
-            Form() {
-                Picker("Exam", selection: $examPicker) {
-                    ForEach(exams, id: \.self) { exam in
-                        Text(exam)
+        NavigationView {
+            Form {
+                Section(header: Text("Exam Details")) {
+                    Picker("Subject", selection: $subject) {
+                        ForEach(exams, id: \.self) { exam in
+                            Text(exam)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    
+                    TextField("Marks", text: $marks)
+                        .keyboardType(.numbersAndPunctuation)
+                    
+                    TextField("Weightage Percentage", text: $weightage)
+                        .keyboardType(.numberPad)
+                }
+                Section(header: Text("Actions")){
+                    Button(){
+                        print("Save")
+                        // todo: link
+                    }label:{
+                        Text("Save")
+                            .foregroundStyle(.green)
+                    }
+                    Button(){
+                        print("Cancel")
+                        dismiss()
+                    }label:{
+                        Text("Cancel")
+                            .foregroundStyle(.red)
                     }
                 }
-                .pickerStyle(MenuPickerStyle())
-                
-                
-                TextField("Marks", text: $marks)
-                    .keyboardType(.numbersAndPunctuation)
-                TextField("Weightage Percentage", text: $weightage)
-                    .keyboardType(.numberPad)
-                TextField("Subject", text: $subject)
             }
-            .navigationTitle("User Form")
-            .navigationBarItems(trailing: Button("Done") {
-                dismiss()
-            })
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 }
 
-
-#Preview{
+#Preview {
     AddMarksSheetView()
 }
