@@ -17,7 +17,7 @@ struct TermGraphView: View {
                     Spacer()
                 }
             }
-            .frame(width: .infinity, height: 300)
+            .frame(width: 358, height: 300)
             .background(.tertiary)
             .clipShape(.rect(cornerRadius: 10))
         }

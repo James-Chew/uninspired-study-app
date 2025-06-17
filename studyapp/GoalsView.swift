@@ -21,7 +21,7 @@ struct GoalsView: View {
                 Text("fvjewvoeagjiajgpfoqjjfw")
                 Spacer()
             }
-            .frame(width: .infinity, height: 200)
+            .frame(width: 358, height: 200)
             .background(.tertiary)
             .clipShape(RoundedRectangle(cornerRadius: 10))
         }

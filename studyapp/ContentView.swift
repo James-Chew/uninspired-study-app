@@ -8,15 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isSheetPresented = false
     var body: some View {
         NavigationStack{
             VStack {
                 TermGraphView()
                 GoalsView()
-                Spacer()
+                Button{
+                    print("Button Clicked")
+                    isSheetPresented = true
+                }
+            label:
+                {
+                    Image("Add New Marks Button - Light")
+                }
+                .padding()
+                
             }
             .navigationTitle("Home")
             .padding()
+            
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            AddMarksSheetView()
         }
     }
 }
