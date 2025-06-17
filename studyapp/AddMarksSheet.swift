@@ -9,10 +9,12 @@ import SwiftUI
 
 struct AddMarksSheetView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var examPicker = ""
+    @EnvironmentObject var examData: ExamData
+    
     @State private var marks = ""
     @State private var weightage = ""
     @State private var subject = ""
+    @State private var exam = ""
     
     let exams = ["Math", "Science", "History", "English", "Literature", "Chinese", "Geography"]
     
@@ -28,38 +30,30 @@ struct AddMarksSheetView: View {
                     .pickerStyle(MenuPickerStyle())
                     
                     TextField("Marks", text: $marks)
-                        .keyboardType(.numbersAndPunctuation)
+                        .keyboardType(.decimalPad)
                     
                     TextField("Weightage Percentage", text: $weightage)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
+                    TextField("Exam", text: $exam)
                 }
-                Section(header: Text("Actions")){
-                    Button(){
-                        print("Save")
-                        // todo: link
-                    }label:{
-                        Text("Save")
-                            .foregroundStyle(.green)
-                    }
-                    Button(){
-                        print("Cancel")
-                        dismiss()
-                    }label:{
-                        Text("Cancel")
-                            .foregroundStyle(.red)
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                
+                Section(header: Text("Actions")) {
+                    Button("Save") {
+                        examData.addExam(subject: subject, exam: exam, marks: marks, weightage: weightage)
                         dismiss()
                     }
+                    .foregroundColor(.green)
+                    
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .foregroundColor(.red)
                 }
             }
         }
     }
 }
+
 
 #Preview {
     AddMarksSheetView()

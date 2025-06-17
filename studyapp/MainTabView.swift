@@ -15,7 +15,7 @@ struct MainTabView: View {
                     Label("Home", systemImage: "house.fill")
                 }
 
-            TermGraphView()
+            ExamListView()
                 .tabItem {
                     Label("Previous Exams", systemImage: "book.pages.fill")
                 }
